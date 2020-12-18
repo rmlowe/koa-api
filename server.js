@@ -27,10 +27,9 @@ router.get('/', (ctx) => {
 })
 
 //GET /posts
-router.get('/posts', (ctx) => {
+router.get('/posts', ctx => {
     ctx.body = posts;
 })
-
 app.use(router.routes());
 
 app.listen(PORT);
