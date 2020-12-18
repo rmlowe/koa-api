@@ -1,11 +1,12 @@
 const Koa = require('koa');
-const bodyParser = require('koa-bodyparser');
 const Router = require('koa-router');
+const bodyParser = require('koa-parser');
 
 const app = new Koa();
-app.use(bodyParser());
 const PORT = 4000;
 const router = new Router();
+
+app.use(bodyParser());
 
 const posts = [
     {
@@ -35,10 +36,24 @@ router.get('/posts', ctx => {
 
 //POST /posts
 router.post('/posts', ctx => {
-    posts.push(ctx.request.body);
     console.log(ctx.request.body);
+    let { id, name, content } = ctx.request.body;
+
+    if (!id) {
+        ctx.throw(400, 'id is required field')
+    }
+    if (!name) {
+        ctx.throw(400, 'name is required field')
+    }
+    if (!content) {
+        ctx.throw(400, 'content is required field')
+    }
+
+    posts.push({ id, name, content });
     ctx.body = posts;
+
 });
+
 app.use(router.routes());
 
 app.listen(PORT);
