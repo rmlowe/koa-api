@@ -1,7 +1,9 @@
 const Koa = require('koa');
+const bodyParser = require('koa-bodyparser');
 const Router = require('koa-router');
 
 const app = new Koa();
+app.use(bodyParser());
 const PORT = 4000;
 const router = new Router();
 
@@ -29,7 +31,14 @@ router.get('/', (ctx) => {
 //GET /posts
 router.get('/posts', ctx => {
     ctx.body = posts;
-})
+});
+
+//POST /posts
+router.post('/posts', ctx => {
+    posts.push(ctx.request.body);
+    console.log(ctx.request.body);
+    ctx.body = posts;
+});
 app.use(router.routes());
 
 app.listen(PORT);
