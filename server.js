@@ -1,17 +1,18 @@
 const Koa = require('koa');
-const Router = require('koa-router');
 const app = new Koa();
-const router = new Router();
 const PORT = 4000;
+//import the koa-router
+const Router = require('koa-router');
+const router = new Router();
+
 
 
 //create a root route
-//welcome to koa application
-router.get('/', (ctx, next) => {
-    ctx.body = 'Welcome to Koa Application!';
-});
-app.use(router.routes())
-    .use(router.allowedMethods());
+router.get('/', (ctx) => {
+    ctx.body = 'welcome to koa application';
+})
+
+app.use(router.routes());
 
 app.listen(PORT);
 console.log(`Server is listening on PORT ${PORT}`);
