@@ -54,6 +54,17 @@ router.post('/posts', ctx => {
 
 });
 
+//GET /posts/:id
+router.get('/posts/:id', ctx => {
+    ctx.body = posts.find(post => post.id === ctx.params.id);
+})
+
+//get the id from the req params
+
+//find the post by id
+
+//return or send the single post in th response
+
 app.use(router.routes());
 
 app.listen(PORT);
