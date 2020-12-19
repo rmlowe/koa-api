@@ -1,6 +1,7 @@
 const Koa = require('koa');
 const Router = require('koa-router');
 const bodyParser = require('koa-parser');
+const _ = require('lodash');
 
 const app = new Koa();
 const PORT = 4000;
@@ -8,7 +9,7 @@ const router = new Router();
 
 app.use(bodyParser());
 
-let posts = [
+const posts = [
     {
         "id": '1',
         "name": "Nodejs Developer",
@@ -61,12 +62,7 @@ router.get('/posts/:id', ctx => {
 
 ///DLETE /posts/:id
 router.delete('/posts/:id', ctx => {
-    //remove the post from the posts array
-
-    //send the removed item in the response
-
-    ctx.body = posts.find(post => post.id === ctx.params.id);
-    posts = posts.filter(post => post.id !== ctx.params.id);
+    ctx.body = _.remove(posts, p => p.id === ctx.params.id);
 });
 
 app.use(router.routes());
