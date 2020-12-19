@@ -8,7 +8,7 @@ const router = new Router();
 
 app.use(bodyParser());
 
-const posts = [
+let posts = [
     {
         "id": '1',
         "name": "Nodejs Developer",
@@ -52,12 +52,22 @@ router.post('/posts', ctx => {
     posts.push({ id, name, content });
     ctx.body = posts;
 
-});
+})
 
 //GET /posts/:id
 router.get('/posts/:id', ctx => {
     ctx.body = posts.find(post => post.id === ctx.params.id);
-})
+});
+
+///DLETE /posts/:id
+router.delete('/posts/:id', ctx => {
+    //remove the post from the posts array
+
+    //send the removed item in the response
+
+    ctx.body = posts.find(post => post.id === ctx.params.id);
+    posts = posts.filter(post => post.id !== ctx.params.id);
+});
 
 app.use(router.routes());
 
