@@ -65,6 +65,39 @@ router.delete('/posts/:id', ctx => {
     ctx.body = _.remove(posts, p => p.id === ctx.params.id);
 });
 
+//PUT /posts/:id
+router.put('/posts/:id', ctx => {
+    const post = posts.find(post => post.id === ctx.params.id);
+    const { id, name, content } = ctx.request.body;
+
+    if (id) {
+        post.id = id;
+    }
+
+    if (name) {
+        post.name = name;
+    }
+
+    if (content) {
+        post.content = content;
+    }
+
+    ctx.body = posts;
+});
+
+//find the index of the post by id
+
+//if user wants to update the id
+//update the id of the current post
+
+//if user wants to update the name
+//update the name of the current post
+
+//if user wants to update the contnet
+//update the content
+
+//return all the posts to the response
+
 app.use(router.routes());
 
 app.listen(PORT);
