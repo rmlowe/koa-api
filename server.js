@@ -67,36 +67,28 @@ router.delete('/posts/:id', ctx => {
 
 //PUT /posts/:id
 router.put('/posts/:id', ctx => {
-    const post = posts.find(post => post.id === ctx.params.id);
-    const { id, name, content } = ctx.request.body;
 
+    let { id, name, content } = ctx.request.body;
+    const index = posts.findIndex(p => p.id === ctx.params.id)
     if (id) {
-        post.id = id;
+        posts[index].id = id;
     }
-
     if (name) {
-        post.name = name;
+        posts[index].name = name;
     }
+    //update the name of the current post
 
+    //if user wants to update the contnet
     if (content) {
-        post.content = content;
+        posts[index].content = content;
     }
+    //update the content
+
+    //return all the posts to the response
+    const post = posts.find(post => post.id === ctx.params.id);
 
     ctx.body = posts;
-});
-
-//find the index of the post by id
-
-//if user wants to update the id
-//update the id of the current post
-
-//if user wants to update the name
-//update the name of the current post
-
-//if user wants to update the contnet
-//update the content
-
-//return all the posts to the response
+})
 
 app.use(router.routes());
 
