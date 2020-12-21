@@ -26,12 +26,12 @@ const posts = [
         "content": "ajkshdkjashdk ajshdkjasd"
     }
 ];
-router.get('/', (ctx) => {
+router.get('/', function baseRoute(ctx) {
     ctx.body = 'welcome to koa application';
 })
 
 //GET /posts
-router.get('/posts', ctx => {
+router.get('/posts', function getPosts(ctx) {
     ctx.body = posts;
 });
 
@@ -76,17 +76,9 @@ router.put('/posts/:id', ctx => {
     if (name) {
         posts[index].name = name;
     }
-    //update the name of the current post
-
-    //if user wants to update the contnet
     if (content) {
         posts[index].content = content;
     }
-    //update the content
-
-    //return all the posts to the response
-    const post = posts.find(post => post.id === ctx.params.id);
-
     ctx.body = posts;
 })
 
